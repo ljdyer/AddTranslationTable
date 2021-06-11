@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<OfficeApp xmlns="http://schemas.microsoft.com/office/appforoffice/1.1"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:bt="http://schemas.microsoft.com/office/officeappbasictypes/1.0"
+  xmlns:mailappor="http://schemas.microsoft.com/office/mailappversionoverrides/1.0"
+  xsi:type="MailApp">
+  <Id>7b6b2e33-8b00-4827-a657-a447f96a8690</Id>
+  <Version>1.0.0.0</Version>
+  <ProviderName>Contoso</ProviderName>
+  <DefaultLocale>en-US</DefaultLocale>
+  <DisplayName DefaultValue="Add Translation Table"/>
+  <Description DefaultValue="Insert a table for translation into email body."/>
+  <IconUrl DefaultValue="https://localhost:3000/assets/mainIcon-64.png"/>
+  <HighResolutionIconUrl DefaultValue="https://localhost:3000/assets/mainIcon-128.png"/>
+  <SupportUrl DefaultValue="https://www.contoso.com/help"/>
+  <AppDomains>
+    <AppDomain>https://www.contoso.com</AppDomain>
+  </AppDomains>
+  <Hosts>
+    <Host Name="Mailbox"/>
+  </Hosts>
+  <Requirements>
+    <Sets>
+      <Set Name="Mailbox" MinVersion="1.1"/>
+    </Sets>
+  </Requirements>
+  <FormSettings>
+    <Form xsi:type="ItemRead">
+      <DesktopSettings>
+        <SourceLocation DefaultValue="https://localhost:3000/taskpane.html"/>
+        <RequestedHeight>250</RequestedHeight>
+      </DesktopSettings>
+    </Form>
+  </FormSettings>
+  <Permissions>ReadWriteItem</Permissions>
+  <Rule xsi:type="RuleCollection" Mode="Or">
+    <Rule xsi:type="ItemIs" ItemType="Message" FormType="Edit"/>
+  </Rule>
+  <DisableEntityHighlighting>false</DisableEntityHighlighting>
+  <VersionOverrides xmlns="http://schemas.microsoft.com/office/mailappversionoverrides" xsi:type="VersionOverridesV1_0">
+    <Requirements>
+      <bt:Sets DefaultMinVersion="1.3">
+        <bt:Set Name="Mailbox"/>
+      </bt:Sets>
+    </Requirements>
+    <Hosts>
+      <Host xsi:type="MailHost">
+        <DesktopFormFactor>
+          <FunctionFile resid="Commands.Url"/>
+          <ExtensionPoint xsi:type="MessageComposeCommandSurface">
+            <OfficeTab id="TabDefault">
+              <Group id="msgReadGroup">
+                <Label resid="GroupLabel"/>
+                <Control xsi:type="Button" id="addTableLeftButton">
+                  <Label resid="addTableLeftButton.Label"/>
+                  <Supertip>
+                    <Title resid="addTableLeftButton.Label"/>
+                    <Description resid="addTableLeftButton.Tooltip"/>
+                  </Supertip>
+                  <Icon>
+                    <bt:Image size="16" resid="AddLeftIcon.16x16"/>
+                    <bt:Image size="32" resid="AddLeftIcon.32x32"/>
+                    <bt:Image size="80" resid="AddLeftIcon.80x80"/>
+                  </Icon>
+                  <Action xsi:type="ExecuteFunction">
+                    <FunctionName>addTableLeft</FunctionName>
+                  </Action>
+                </Control>
+                <Control xsi:type="Button" id="addTableRightButton">
+                  <Label resid="addTableRightButton.Label"/>
+                  <Supertip>
+                    <Title resid="addTableRightButton.Label"/>
+                    <Description resid="addTableRightButton.Tooltip"/>
+                  </Supertip>
+                  <Icon>
+                    <bt:Image size="16" resid="AddRightIcon.16x16"/>
+                    <bt:Image size="32" resid="AddRightIcon.32x32"/>
+                    <bt:Image size="80" resid="AddRightIcon.80x80"/>
+                  </Icon>
+                  <Action xsi:type="ExecuteFunction">
+                    <FunctionName>addTableRight</FunctionName>
+                  </Action>
+                </Control>
+
+                <!-- Taskpane used only for debugging -->
+
+                <!-- <Control xsi:type="Button" id="msgComposeOpenPaneButton">
+                  <Label resid="TaskpaneButton.Label"/>
+                  <Supertip>
+                    <Title resid="TaskpaneButton.Label"/>
+                    <Description resid="TaskpaneButton.Tooltip"/>
+                  </Supertip>
+                  <Icon>
+                    <bt:Image size="16" resid="AddLeftIcon.16x16"/>
+                    <bt:Image size="32" resid="AddLeftIcon.32x32"/>
+                    <bt:Image size="80" resid="AddLeftIcon.80x80"/>
+                  </Icon>
+                  <Action xsi:type="ShowTaskpane">
+                    <SourceLocation resid="Taskpane.Url"/>
+                  </Action>
+                </Control> -->
+              </Group>
+            </OfficeTab>
+          </ExtensionPoint>
+        </DesktopFormFactor>
+      </Host>
+    </Hosts>
+    <Resources>
+      <bt:Images>
+        <bt:Image id="AddLeftIcon.16x16" DefaultValue="https://localhost:3000/assets/addLeftIcon-16.png"/>
+        <bt:Image id="AddLeftIcon.32x32" DefaultValue="https://localhost:3000/assets/addLeftIcon-32.png"/>
+        <bt:Image id="AddLeftIcon.80x80" DefaultValue="https://localhost:3000/assets/addLeftIcon-80.png"/>
+        <bt:Image id="AddRightIcon.16x16" DefaultValue="https://localhost:3000/assets/addRightIcon-16.png"/>
+        <bt:Image id="AddRightIcon.32x32" DefaultValue="https://localhost:3000/assets/addRightIcon-32.png"/>
+        <bt:Image id="AddRightIcon.80x80" DefaultValue="https://localhost:3000/assets/addRightIcon-80.png"/>
+      </bt:Images>
+      <bt:Urls>
+        <bt:Url id="Commands.Url" DefaultValue="https://localhost:3000/commands.html"/>
+        <bt:Url id="Taskpane.Url" DefaultValue="https://localhost:3000/taskpane.html"/>
+      </bt:Urls>
+      <bt:ShortStrings>
+        <bt:String id="GroupLabel" DefaultValue="Add Translation Table"/>
+        <bt:String id="addTableLeftButton.Label" DefaultValue="Insert table (source left)"/>
+        <bt:String id="addTableRightButton.Label" DefaultValue="Insert table (source right)"/>
+        <bt:String id="TaskpaneButton.Label" DefaultValue="Show taskpane"/>
+      </bt:ShortStrings>
+      <bt:LongStrings>
+        <bt:String id="addTableLeftButton.Tooltip" DefaultValue="Insert a table with the source text in the left-hand column."/>
+        <bt:String id="addTableRightButton.Tooltip" DefaultValue="Insert a table with the source text in the right-hand column."/>
+        <bt:String id="TaskpaneButton.Tooltip" DefaultValue="Show taskpane."/>
+      </bt:LongStrings>
+    </Resources>
+  </VersionOverrides>
+</OfficeApp>
